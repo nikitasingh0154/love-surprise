@@ -1,0 +1,118 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I Love You ❤️</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(circle, #570021, #16000c, #000);
+            font-family: Arial, sans-serif;
+            color: white;
+        }
+
+        .container {
+            text-align: center;
+            z-index: 2;
+        }
+
+        .heart {
+            font-size: 120px;
+            cursor: pointer;
+            animation: beat 1s infinite;
+            filter: drop-shadow(0 0 20px #ff1744);
+        }
+
+        h1 {
+            font-size: clamp(32px, 7vw, 55px);
+            color: #ffb3d1;
+            text-shadow: 0 0 20px #ff1744;
+            animation: glow 2s infinite alternate;
+        }
+
+        .message {
+            margin-top: 20px;
+            font-size: 20px;
+            color: #ffb3d1;
+        }
+
+        .hint {
+            margin-top: 25px;
+            color: #ffd5e5;
+            font-size: 14px;
+        }
+
+        .floating-heart {
+            position: fixed;
+            bottom: -40px;
+            animation: floatUp linear forwards;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @keyframes beat {
+            50% { transform: scale(1.2); }
+        }
+
+        @keyframes glow {
+            to { text-shadow: 0 0 35px #ff1744; }
+        }
+
+        @keyframes floatUp {
+            to {
+                transform: translateY(-110vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="heart" id="heart">❤️</div>
+        <h1 id="title">I Love You</h1>
+        <p class="message">Forever and Always 💕</p>
+        <p class="hint">Click the heart for a surprise!</p>
+    </div>
+
+    <script>
+        function createHeart() {
+            const heart = document.createElement("div");
+            heart.className = "floating-heart";
+            heart.textContent = Math.random() > 0.5 ? "❤️" : "💕";
+
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.fontSize = (15 + Math.random() * 25) + "px";
+            heart.style.animationDuration = (3 + Math.random() * 4) + "s";
+
+            document.body.appendChild(heart);
+
+            setTimeout(() => heart.remove(), 7000);
+        }
+
+        setInterval(createHeart, 250);
+
+        document.getElementById("heart").addEventListener("click", () => {
+            document.getElementById("title").textContent =
+                "I Love You So Much ❤️";
+
+            for (let i = 0; i < 20; i++) {
+                setTimeout(createHeart, i * 80);
+            }
+        });
+    </script>
+</body>
+</html>
